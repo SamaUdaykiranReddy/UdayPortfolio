@@ -34,7 +34,7 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Intersection observer for active section
+  // IntersectionObserver for active section highlighting
   useEffect(() => {
     const sections = navLinks
       .map((link) => document.getElementById(link.id))
@@ -48,24 +48,34 @@ export function Navigation() {
           }
         });
       },
-      { threshold: 0.4, rootMargin: "-50px 0px -50px 0px" }
+      {
+        threshold: 0.4,
+        rootMargin: `-${
+          document.querySelector("nav")?.offsetHeight || 0
+        }px 0px -50px 0px`,
+      }
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
-  // Scroll to section with navbar offset
   const scrollToSection = (id) => {
-    setIsMobileMenuOpen(false); // close menu first
+    // Close the mobile menu first
+    setIsMobileMenuOpen(false);
+
+    // Delay to allow menu to close and layout to update
     setTimeout(() => {
       const element = document.getElementById(id);
       const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
+
       if (element) {
-        const offsetPosition = element.offsetTop - navbarHeight - 10;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - navbarHeight - 10; // optional padding
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       }
-    }, 100);
+    }, 150); // 150ms works well
   };
 
   return (
