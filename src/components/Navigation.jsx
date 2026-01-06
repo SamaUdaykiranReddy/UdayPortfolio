@@ -20,7 +20,7 @@ export function Navigation() {
     { id: "contact", label: "Contact" },
   ];
 
-  // Scroll & progress bar
+  // Scroll progress
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -34,7 +34,7 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll spy for active section
+  // Intersection observer for active section
   useEffect(() => {
     const sections = navLinks
       .map((link) => document.getElementById(link.id))
@@ -48,20 +48,24 @@ export function Navigation() {
           }
         });
       },
-      {
-        threshold: 0.4, // lower threshold to catch shorter sections
-        rootMargin: "-50px 0px -50px 0px", // adjust trigger position
-      }
+      { threshold: 0.4, rootMargin: "-50px 0px -50px 0px" }
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
+  // Scroll to section with navbar offset
   const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setIsMobileMenuOpen(false);
+    setIsMobileMenuOpen(false); // close menu first
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
+      if (element) {
+        const offsetPosition = element.offsetTop - navbarHeight - 10;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }, 100);
   };
 
   return (
@@ -116,10 +120,7 @@ export function Navigation() {
                 {link.label}
               </motion.button>
             ))}
-
-            {/* Vertical line between theme toggle and nav */}
             <div className="w-px h-8 bg-gray-300 mx-2" />
-
             <ThemeToggle />
           </div>
 
@@ -149,7 +150,11 @@ export function Navigation() {
                 <Button
                   key={link.id}
                   variant="ghost"
-                  className="w-full justify-start"
+                  className={`w-full justify-start ${
+                    activeSection === link.id
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground"
+                  }`}
                   onClick={() => scrollToSection(link.id)}
                 >
                   {link.label}
