@@ -6,7 +6,8 @@ import {
   Users,
   Zap,
   TrendingUp,
-  Clock,
+  Brain,
+  Database,
 } from "lucide-react";
 import { Badge } from "./ui/Badge";
 import { motion } from "framer-motion";
@@ -14,10 +15,61 @@ import { motion } from "framer-motion";
 export function Projects() {
   const projects = [
     {
+      title: "Student AI — Early Warning System",
+      company: "Personal Project",
+      category: "Full-Stack AI / ML Platform",
+      year: "2025",
+      description:
+        "Predicts which students are at risk of failing 4 weeks before it happens — then tells instructors exactly what to do about it. Built with a full ML pipeline, LangChain AI agent, RAG chatbot, and auto-retraining on real student data.",
+      challenge:
+        "Universities lose millions to dropouts every year. Traditional systems flag students after they fail. The challenge was building a system that predicts risk weeks in advance using behavioral signals, explains why a student is at risk, and generates specific actionable recommendations for instructors.",
+      solution:
+        "Built an XGBoost ML model trained on 14 behavioral features (logins, forum posts, video watches, assignment submissions). SHAP explains the top 3 risk factors per student. Groq API generates actionable recommendations. A LangChain AI agent monitors students autonomously, and a RAG chatbot answers student questions using Pinecone vector search. The model auto-retrains weekly on real PostgreSQL data with drift detection.",
+      results:
+        "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. Predictions delivered in ~200ms. Model retrains automatically every week on real student behavior and gets smarter over time. Drift detection alerts instructors if model accuracy drops more than 10%.",
+      image:
+        "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&h=800&fit=crop",
+      tags: [
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Python",
+        "FastAPI",
+        "XGBoost",
+        "SHAP",
+        "LangChain",
+        "Groq API",
+        "Pinecone",
+        "PostgreSQL",
+        "Redis",
+        "AWS EC2",
+        "Docker",
+        "GitHub Actions",
+        "SendGrid",
+        "MLflow",
+      ],
+      metrics: [
+        { icon: Brain, label: "XGBoost + SHAP", sublabel: "ML Predictions" },
+        { icon: Zap, label: "~200ms", sublabel: "Prediction Speed" },
+        {
+          icon: TrendingUp,
+          label: "Auto Retraining",
+          sublabel: "Weekly on Real Data",
+        },
+        {
+          icon: Users,
+          label: "LangChain Agent",
+          sublabel: "Autonomous Monitoring",
+        },
+      ],
+      liveUrl: "http://54.86.60.216:3001",
+      githubUrl: "https://github.com/SamaUdaykiranReddy/student-ai",
+    },
+    {
       title: "Kitchen Management Web Application",
       company: "GenX AI",
       category: "Full-Stack Web Application",
-      year: "2025",
+      year: "2024",
       description:
         "A product-focused kitchen and order management system where admins manage items and users place orders through a responsive web interface.",
       challenge:
@@ -33,7 +85,7 @@ export function Projects() {
         "Node.js",
         "MongoDB",
         "Tailwind CSS",
-        "Custom CSS",
+        "REST APIs",
         "Postman",
       ],
       metrics: [
@@ -44,7 +96,7 @@ export function Projects() {
           label: "Scalable",
           sublabel: "Future-Ready Design",
         },
-        { icon: Clock, label: "Real-Time", sublabel: "Order Handling" },
+        { icon: Database, label: "MongoDB", sublabel: "Data Storage" },
       ],
       liveUrl: "#",
       githubUrl: "#",
@@ -62,20 +114,18 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-4 mb-8">
-            <div className="text-sm text-primary uppercase tracking-wider">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="text-sm text-primary uppercase tracking-wider font-medium">
               Portfolio
             </div>
-            <div className="h-px flex-1 bg-gray-300" />
+            <div className="h-px flex-1 bg-border" />
           </div>
-
-          <h2 className="text-4xl md:text-5xl mb-8 tracking-tight leading-tight text-left">
-            Future Case Studies
+          <h2 className="text-4xl md:text-5xl mb-4 tracking-tight leading-tight">
+            Featured Projects
           </h2>
-
-          <p className="text-muted-foreground max-w-3xl text-left">
+          <p className="text-muted-foreground max-w-3xl">
             In-depth look at real-world projects showcasing full-stack
-            development, problem-solving, and scalable application design.
+            development, machine learning, and scalable application design.
           </p>
         </motion.div>
 
@@ -89,19 +139,18 @@ export function Projects() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <Card className="overflow-hidden border-2 hover:border-foreground transition-all text-left rounded-lg">
+              <Card className="overflow-hidden border-2 hover:border-foreground transition-all rounded-xl">
                 {/* Project Header */}
-                <div className="p-8 md:p-10 border-b bg-muted/30 bg-gray-100">
-                  <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div className="p-8 md:p-10 border-b bg-muted/30">
+                  <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                     <div>
                       <div className="flex items-center gap-3 mb-3">
                         <Badge>{project.category}</Badge>
                         <span className="text-sm text-muted-foreground">
-                          {project.company} • {project.year}
+                          {project.company} · {project.year}
                         </span>
                       </div>
-
-                      <h3 className="text-3xl md:text-4xl mb-3 tracking-tight">
+                      <h3 className="text-2xl md:text-3xl mb-3 tracking-tight">
                         {project.title}
                       </h3>
                       <p className="text-muted-foreground max-w-3xl">
@@ -117,11 +166,13 @@ export function Projects() {
                       return (
                         <div
                           key={i}
-                          className="flex items-center gap-3 p-4 bg-background border border-border"
+                          className="flex items-center gap-3 p-4 bg-background border border-border rounded-xl"
                         >
-                          <Icon className="h-5 w-5 text-primary" />
+                          <Icon className="h-5 w-5 text-primary flex-shrink-0" />
                           <div>
-                            <div className="text-lg">{metric.label}</div>
+                            <div className="text-sm font-medium">
+                              {metric.label}
+                            </div>
                             <div className="text-xs text-muted-foreground">
                               {metric.sublabel}
                             </div>
@@ -135,7 +186,7 @@ export function Projects() {
                 {/* Project Content */}
                 <div className="grid lg:grid-cols-5">
                   {/* Image */}
-                  <div className="lg:col-span-2 bg-muted">
+                  <div className="lg:col-span-2 bg-muted min-h-[300px]">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -144,58 +195,76 @@ export function Projects() {
                   </div>
 
                   {/* Details */}
-                  <div className="lg:col-span-3 p-8 md:p-10 space-y-8">
+                  <div className="lg:col-span-3 p-8 md:p-10 space-y-6">
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-primary mb-3">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
                         The Challenge
                       </h4>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-muted-foreground leading-relaxed text-sm">
                         {project.challenge}
                       </p>
                     </div>
 
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-primary mb-3">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
                         The Solution
                       </h4>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-muted-foreground leading-relaxed text-sm">
                         {project.solution}
                       </p>
                     </div>
 
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-primary mb-3">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
                         The Results
                       </h4>
-                      <p className="leading-relaxed">{project.results}</p>
+                      <p className="leading-relaxed text-sm">
+                        {project.results}
+                      </p>
                     </div>
 
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-primary mb-4">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-3">
                         Technologies Used
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag, i) => (
-                          <Badge key={i} variant="secondary">
+                          <Badge
+                            key={i}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {tag}
                           </Badge>
                         ))}
                       </div>
                     </div>
 
-                    <div className="flex gap-4 pt-4 border-t border-border">
-                      <Button asChild>
-                        <a href={project.liveUrl}>
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          View Project
-                        </a>
-                      </Button>
-                      <Button asChild variant="outline">
-                        <a href={project.githubUrl}>
-                          <Github className="h-4 w-4 mr-2" />
-                          Source Code
-                        </a>
-                      </Button>
+                    <div className="flex gap-4 pt-2 border-t border-border">
+                      {project.liveUrl !== "#" && (
+                        <Button asChild size="sm">
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      )}
+                      {project.githubUrl !== "#" && (
+                        <Button asChild variant="outline" size="sm">
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github className="h-4 w-4 mr-2" />
+                            Source Code
+                          </a>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
