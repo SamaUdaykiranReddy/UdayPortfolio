@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/Button";
@@ -12,13 +12,16 @@ export function Navigation() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("about");
 
-  const navLinks = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "projects", label: "Work" },
-    { id: "contact", label: "Contact" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      { id: "about", label: "About" },
+      { id: "skills", label: "Skills" },
+      { id: "experience", label: "Experience" },
+      { id: "projects", label: "Work" },
+      { id: "contact", label: "Contact" },
+    ],
+    [],
+  );
 
   // Scroll progress
   useEffect(() => {

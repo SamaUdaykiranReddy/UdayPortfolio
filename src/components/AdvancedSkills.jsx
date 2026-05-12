@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/Tabs";
 import { Skills } from "./Skills";
 import { SkillsRadar } from "./SkillsRadar";
@@ -14,6 +15,7 @@ export default function AdvancedSkills() {
     { name: "System Design", level: 80 },
     { name: "Tools", level: 80 },
   ];
+
   const tools = [
     "Git",
     "GitHub",
@@ -41,9 +43,31 @@ export default function AdvancedSkills() {
 
           {/* Overview Tab */}
           <TabsContent value="overview">
-            <div className=" grid lg:grid-cols-2 gap-12 items-start">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <SkillsRadar skills={radarSkills} />
               <ProficiencyBreakdown skills={radarSkills} />
+            </div>
+
+            {/* Tools & Platforms */}
+            <div className="mt-16 border-t border-border pt-12">
+              <h3 className="text-center font-medium mb-6 text-muted-foreground uppercase tracking-widest text-sm">
+                Tools & Platforms
+              </h3>
+              <div className="flex flex-wrap gap-3 justify-center">
+                {tools.map((tool, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                    whileHover={{ scale: 1.08, y: -3 }}
+                    className="px-4 py-2 border border-border rounded-full text-sm bg-background hover:bg-foreground hover:text-background transition-all cursor-default"
+                  >
+                    {tool}
+                  </motion.span>
+                ))}
+              </div>
             </div>
           </TabsContent>
 
