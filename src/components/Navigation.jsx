@@ -34,7 +34,6 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // IntersectionObserver for active section highlighting
   useEffect(() => {
     const sections = navLinks
       .map((link) => document.getElementById(link.id))
@@ -61,10 +60,8 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id) => {
-    // Close the mobile menu first
     setIsMobileMenuOpen(false);
 
-    // Delay to allow menu to close and layout to update
     setTimeout(() => {
       const element = document.getElementById(id);
       const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
@@ -72,10 +69,10 @@ export function Navigation() {
       if (element) {
         const elementPosition =
           element.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - navbarHeight - 10; // optional padding
+        const offsetPosition = elementPosition - navbarHeight - 10;
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       }
-    }, 150); // 150ms works well
+    }, 150);
   };
 
   return (
