@@ -1,4 +1,4 @@
-import { motion, percent } from "framer-motion";
+import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Award, ChevronRight } from "lucide-react";
 
 import { InteractiveTimeline } from "./InteractiveTimeline";
@@ -35,7 +35,7 @@ export function Experience() {
         "Fixed production bugs and improved system stability",
         "Participated in code reviews and agile development processes",
       ],
-      technologies: ["React", "JavaScript", "Node.js", "MongoDB",],
+      technologies: ["React", "JavaScript", "Node.js", "MongoDB"],
     },
     {
       title: "Junior Software Developer",
@@ -67,7 +67,7 @@ export function Experience() {
         "Active participant in coding contests and technical events",
       ],
     },
-     {
+    {
       degree: "Master's in Computer Science",
       school: "Rivier University",
       period: "2022 - 2024",

@@ -52,12 +52,12 @@ export function Navigation() {
         rootMargin: `-${
           document.querySelector("nav")?.offsetHeight || 0
         }px 0px -50px 0px`,
-      }
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
+  }, [navLinks]);
 
   const scrollToSection = (id) => {
     setIsMobileMenuOpen(false);
