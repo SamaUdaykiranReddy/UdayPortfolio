@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/Tabs";
 import { Skills } from "./Skills";
 import { SkillsRadar } from "./SkillsRadar";
 import TechStackComparison from "./TechStackCamparison";
-import { GitHubStats } from "./GitHubStats";
 import { CodeShowcase } from "./CodeShowcase";
 import { ProficiencyBreakdown } from "./ProficiencyBreakdown";
 
@@ -35,11 +34,10 @@ export default function AdvancedSkills() {
     <section id="skills" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         <Tabs defaultValue="overview" className="max-w-7xl mx-auto">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-12">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-12">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="detailed">Detailed Skills</TabsTrigger>
             <TabsTrigger value="comparison">Tech Stack</TabsTrigger>
-            <TabsTrigger value="github">GitHub Stats</TabsTrigger>
             <TabsTrigger value="code">Code Examples</TabsTrigger>
           </TabsList>
 
@@ -79,10 +77,6 @@ export default function AdvancedSkills() {
 
           <TabsContent value="comparison">
             <TechStackComparison />
-          </TabsContent>
-
-          <TabsContent value="github">
-            <GitHubStats />
           </TabsContent>
 
           <TabsContent value="code">
