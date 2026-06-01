@@ -103,8 +103,8 @@ export function InteractiveTimeline({ experiences }) {
                         transition={{ duration: 0.3, delay: i * 0.05 }}
                         className="flex items-start gap-3"
                       >
-                        <ChevronRight className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                        <span className="text-sm leading-relaxed">
+                        <ChevronRight className="h-4 w-4 mt-1 flex-shrink-0 text-primary" />
+                        <span className="text-sm leading-relaxed flex-1">
                           {achievement}
                         </span>
                       </motion.div>
