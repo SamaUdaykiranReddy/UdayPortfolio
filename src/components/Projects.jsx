@@ -11,6 +11,8 @@ import {
   Shield,
   Bot,
   GitPullRequest,
+  Building2,
+  Search,
 } from "lucide-react";
 import { Badge } from "./ui/Badge";
 import { motion } from "framer-motion";
@@ -47,9 +49,6 @@ export function Projects() {
         "AWS EC2",
         "Docker",
         "GitHub Actions",
-        "SendGrid",
-        "Jira API",
-        "Slack",
         "npm SDK",
       ],
       metrics: [
@@ -65,6 +64,7 @@ export function Projects() {
       liveUrl: "http://34.205.172.253:3002",
       githubUrl: "https://github.com/SamaUdaykiranReddy/devmind",
       npmUrl: "https://www.npmjs.com/package/devmind-sdk",
+      proprietary: false,
     },
     {
       title: "Student AI — Early Warning System",
@@ -74,9 +74,9 @@ export function Projects() {
       description:
         "Predicts which students are at risk of failing 4 weeks before it happens — then tells instructors exactly what to do about it. Built with a full ML pipeline, LangChain AI agent, RAG chatbot, and auto-retraining on real student data.",
       challenge:
-        "Universities lose millions to dropouts every year. Traditional systems flag students after they fail. The challenge was building a system that predicts risk weeks in advance using behavioral signals, explains why a student is at risk, and generates specific actionable recommendations for instructors.",
+        "Universities lose millions to dropouts every year. Traditional systems flag students after they fail. The challenge was building a system that predicts risk weeks in advance using behavioral signals, explains why a student is at risk, and generates specific actionable recommendations.",
       solution:
-        "Built an XGBoost ML model trained on 14 behavioral features. SHAP explains the top 3 risk factors per student. Groq API generates actionable recommendations. A LangChain AI agent monitors students autonomously, and a RAG chatbot answers student questions using Pinecone vector search. The model auto-retrains weekly on real PostgreSQL data with drift detection.",
+        "Built an XGBoost ML model trained on 14 behavioral features. SHAP explains the top 3 risk factors per student. Groq API generates actionable recommendations. A LangChain AI agent monitors students autonomously, and a RAG chatbot answers student questions using Pinecone vector search.",
       results:
         "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. Predictions delivered in ~200ms. Model retrains automatically every week on real student behavior. Drift detection alerts instructors if model accuracy drops more than 10%.",
       image:
@@ -96,7 +96,6 @@ export function Projects() {
         "Redis",
         "AWS EC2",
         "Docker",
-        "GitHub Actions",
         "MLflow",
       ],
       metrics: [
@@ -116,6 +115,97 @@ export function Projects() {
       liveUrl: "http://54.86.60.216:3001",
       githubUrl: "https://github.com/SamaUdaykiranReddy/student-ai",
       npmUrl: null,
+      proprietary: false,
+    },
+    {
+      title: "Multi-Agent Banking Automation System",
+      company: "Wells Fargo / Deloitte",
+      category: "Enterprise Agentic AI",
+      year: "2024",
+      description:
+        "Autonomous multi-agent system for banking operations — handling customer servicing, workflow approvals, document verification, and backend task execution with contextual reasoning.",
+      challenge:
+        "Banking operations involved repetitive manual decision-making across customer servicing and workflow approvals. Traditional automation lacked contextual reasoning, resulting in delays, higher manual effort, and inconsistent operational decisions.",
+      solution:
+        "Architected a planner-executor multi-agent framework with tool-calling, contextual memory, and fallback routing. Integrated GPT-4, Claude, and Gemini via MCP. Built compliance checkpoints into decision layers and established monitoring pipelines for agent performance.",
+      results:
+        "Reduced manual effort by 40%, operational turnaround time by 18%, and improved enterprise throughput by 16%. Enabled scalable intelligent banking automation with consistent, compliant decision execution.",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop",
+      tags: [
+        "Python",
+        "GPT-4",
+        "Claude",
+        "Gemini",
+        "MCP",
+        "Multi-Agent Systems",
+        "Tool Calling",
+        "Memory Strategies",
+        "AWS Bedrock",
+        "Vector Databases",
+        "Async Execution",
+      ],
+      metrics: [
+        {
+          icon: Building2,
+          label: "40% Less Manual Effort",
+          sublabel: "Banking Operations",
+        },
+        { icon: TrendingUp, label: "18% Faster", sublabel: "Turnaround Time" },
+        { icon: Zap, label: "16% Throughput", sublabel: "Improvement" },
+        { icon: Shield, label: "Compliance", sublabel: "Checkpoints Built-In" },
+      ],
+      liveUrl: null,
+      githubUrl: null,
+      npmUrl: null,
+      proprietary: true,
+    },
+    {
+      title: "Enterprise RAG Knowledge Platform",
+      company: "Deloitte",
+      category: "Enterprise RAG System",
+      year: "2023",
+      description:
+        "Enterprise-grade RAG platform enabling self-service knowledge retrieval from fragmented internal repositories across consulting teams, replacing slow SME-dependent search workflows.",
+      challenge:
+        "Enterprise teams struggled to retrieve accurate knowledge from fragmented internal repositories. Existing search produced irrelevant results, delayed decision-making, and increased dependency on subject matter experts.",
+      solution:
+        "Designed full RAG architecture with ingestion pipelines, semantic embeddings, vector search, and re-ranking models. Implemented contextual grounding and model routing between OpenAI, Claude, Gemini, and Cohere. Built response evaluation and benchmarking frameworks.",
+      results:
+        "Improved response accuracy by 38%, response relevance by 18%, and decision accuracy by 17%. Significantly reduced SME dependency and accelerated business decision-making across enterprise teams.",
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop",
+      tags: [
+        "Python",
+        "GPT-4",
+        "Claude",
+        "Gemini",
+        "RAG",
+        "Embeddings",
+        "Re-ranking",
+        "Vector Databases",
+        "AWS Bedrock",
+        "OpenAI",
+        "Cohere",
+      ],
+      metrics: [
+        {
+          icon: Search,
+          label: "38% Accuracy",
+          sublabel: "Response Improvement",
+        },
+        { icon: Brain, label: "17% Better", sublabel: "Decision Accuracy" },
+        {
+          icon: Users,
+          label: "SME Dependency",
+          sublabel: "Significantly Reduced",
+        },
+        { icon: Database, label: "Multi-Provider", sublabel: "Model Routing" },
+      ],
+      liveUrl: null,
+      githubUrl: null,
+      npmUrl: null,
+      proprietary: true,
     },
     {
       title: "Kitchen Management Web Application",
@@ -153,6 +243,7 @@ export function Projects() {
       liveUrl: null,
       githubUrl: null,
       npmUrl: null,
+      proprietary: false,
     },
   ];
 
@@ -176,8 +267,9 @@ export function Projects() {
             Featured Projects
           </h2>
           <p className="text-muted-foreground max-w-3xl">
-            Real-world projects spanning agentic AI systems, machine learning
-            platforms, and full-stack web applications.
+            Real-world projects spanning enterprise agentic AI systems, machine
+            learning platforms, and full-stack applications — from banking
+            automation to autonomous debugging.
           </p>
         </motion.div>
 
@@ -195,11 +287,16 @@ export function Projects() {
                 <div className="p-8 md:p-10 border-b bg-muted/30">
                   <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                     <div>
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center gap-3 mb-3 flex-wrap">
                         <Badge>{project.category}</Badge>
                         <span className="text-sm text-muted-foreground">
                           {project.company} · {project.year}
                         </span>
+                        {project.proprietary && (
+                          <span className="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                            🔒 Proprietary — No Public Code
+                          </span>
+                        )}
                       </div>
                       <h3 className="text-2xl md:text-3xl mb-3 tracking-tight font-semibold">
                         {project.title}
@@ -321,6 +418,12 @@ export function Projects() {
                             npm Package
                           </a>
                         </Button>
+                      )}
+                      {project.proprietary && (
+                        <span className="text-xs text-muted-foreground flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-lg">
+                          <Shield className="h-3.5 w-3.5" />
+                          Enterprise project — code is proprietary
+                        </span>
                       )}
                     </div>
                   </div>
