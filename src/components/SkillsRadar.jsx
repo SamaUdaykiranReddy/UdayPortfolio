@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -17,9 +17,7 @@ export function SkillsRadar({ skills }) {
       .map((value, i) => {
         const angle = (Math.PI * 2 * i) / values.length - Math.PI / 2;
         const r = (value / 100) * radius;
-        return `${centerX + r * Math.cos(angle)},${
-          centerY + r * Math.sin(angle)
-        }`;
+        return `${centerX + r * Math.cos(angle)},${centerY + r * Math.sin(angle)}`;
       })
       .join(" ");
 
@@ -44,9 +42,9 @@ export function SkillsRadar({ skills }) {
             cy={centerY}
             r={(radius / levels) * (i + 1)}
             fill="none"
-            stroke="#ccc"
-            strokeWidth="0.7"
-            opacity={0.25}
+            stroke="hsl(var(--border))"
+            strokeWidth="0.8"
+            opacity={0.6}
           />
         ))}
 
@@ -60,9 +58,9 @@ export function SkillsRadar({ skills }) {
               y1={centerY}
               x2={p.x}
               y2={p.y}
-              stroke="#ccc"
-              strokeWidth="0.7"
-              opacity={0.25}
+              stroke="hsl(var(--border))"
+              strokeWidth="0.8"
+              opacity={0.6}
             />
           );
         })}
@@ -70,9 +68,9 @@ export function SkillsRadar({ skills }) {
         {/* Data polygon */}
         <motion.polygon
           points={getPolygonPoints(skills.map((s) => s.level))}
-          fill="#e5e5e5"
-          fillOpacity={0.4}
-          stroke="#bbb"
+          fill="hsl(var(--primary))"
+          fillOpacity={0.15}
+          stroke="hsl(var(--primary))"
           strokeWidth="2"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -85,15 +83,18 @@ export function SkillsRadar({ skills }) {
           const r = (skill.level / 100) * radius;
           const x = centerX + r * Math.cos(angle);
           const y = centerY + r * Math.sin(angle);
+          const isActive = i === activeIndex;
 
           return (
             <circle
               key={i}
               cx={x}
               cy={y}
-              r={4}
-              fill="#999"
-              className="cursor-pointer"
+              r={isActive ? 6 : 4}
+              fill={
+                isActive ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.7)"
+              }
+              className="cursor-pointer transition-all"
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => setSelectedIndex(i)}
@@ -104,8 +105,8 @@ export function SkillsRadar({ skills }) {
         {/* Labels */}
         {skills.map((skill, i) => {
           const angle = (Math.PI * 2 * i) / skills.length - Math.PI / 2;
-          const x = centerX + (radius + 25) * Math.cos(angle);
-          const y = centerY + (radius + 25) * Math.sin(angle);
+          const x = centerX + (radius + 28) * Math.cos(angle);
+          const y = centerY + (radius + 28) * Math.sin(angle);
           const isActive = i === activeIndex;
 
           return (
@@ -115,10 +116,13 @@ export function SkillsRadar({ skills }) {
               y={y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="text-xs"
+              fontSize="10"
               style={{
-                fill: isActive ? "#111" : "#666",
+                fill: isActive
+                  ? "hsl(var(--foreground))"
+                  : "hsl(var(--muted-foreground))",
                 fontWeight: isActive ? 700 : 400,
+                transition: "fill 0.2s ease",
               }}
             >
               {skill.name}
@@ -132,7 +136,7 @@ export function SkillsRadar({ skills }) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-md text-sm shadow-lg"
+          className="absolute top-4 left-1/2 -translate-x-1/2 bg-foreground text-background px-4 py-2 rounded-xl text-sm shadow-lg font-medium"
         >
           {skills[activeIndex].name}: {skills[activeIndex].level}%
         </motion.div>
