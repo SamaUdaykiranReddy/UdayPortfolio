@@ -8,12 +8,64 @@ import {
   TrendingUp,
   Brain,
   Database,
+  Shield,
+  Bot,
+  GitPullRequest,
 } from "lucide-react";
 import { Badge } from "./ui/Badge";
 import { motion } from "framer-motion";
 
 export function Projects() {
   const projects = [
+    {
+      title: "DevMind Pro — Autonomous AI Debugging Platform",
+      company: "Personal Project",
+      category: "Agentic AI Platform",
+      year: "2026",
+      description:
+        "DevMind detects production errors, diagnoses root causes, generates fixes, writes BDD tests, and opens GitHub PRs — fully autonomously. Zero debugging required. Published as an npm SDK.",
+      challenge:
+        "Developers waste hours debugging production errors manually. Traditional tools like Sentry only capture errors — they don't fix them. The challenge was building a fully autonomous system that not only detects errors but analyzes, fixes, tests, and deploys the solution without human intervention.",
+      solution:
+        "Built a 7-agent LangGraph pipeline (Anomaly Detector → Root Cause Analyst → Fix Suggester → Test Generator → BDD Generator → Explainer → PR Creator). RAG on the user's actual codebase via Pinecone ensures fixes reference real function names. Multi-tenant architecture with per-user GitHub, Jira, Slack, and email integrations. Published devmind-sdk to npm.",
+      results:
+        "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. SDK published on npm. Automatically creates GitHub PRs with fixes applied, Jira tickets, Slack notifications, and email alerts. Each error analyzed in ~200ms with 7 specialized AI agents.",
+      image:
+        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=800&fit=crop",
+      tags: [
+        "Next.js 15",
+        "TypeScript",
+        "Node.js",
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "Groq",
+        "Pinecone",
+        "RAG",
+        "PostgreSQL",
+        "Redis",
+        "AWS EC2",
+        "Docker",
+        "GitHub Actions",
+        "SendGrid",
+        "Jira API",
+        "Slack",
+        "npm SDK",
+      ],
+      metrics: [
+        { icon: Bot, label: "7 AI Agents", sublabel: "LangGraph Pipeline" },
+        {
+          icon: GitPullRequest,
+          label: "Auto GitHub PR",
+          sublabel: "Zero Manual Debugging",
+        },
+        { icon: Zap, label: "~200ms", sublabel: "Per Error Analysis" },
+        { icon: Shield, label: "Multi-Tenant", sublabel: "Per-User Isolation" },
+      ],
+      liveUrl: "http://34.205.172.253:3002",
+      githubUrl: "https://github.com/SamaUdaykiranReddy/devmind",
+      npmUrl: "https://www.npmjs.com/package/devmind-sdk",
+    },
     {
       title: "Student AI — Early Warning System",
       company: "Personal Project",
@@ -24,9 +76,9 @@ export function Projects() {
       challenge:
         "Universities lose millions to dropouts every year. Traditional systems flag students after they fail. The challenge was building a system that predicts risk weeks in advance using behavioral signals, explains why a student is at risk, and generates specific actionable recommendations for instructors.",
       solution:
-        "Built an XGBoost ML model trained on 14 behavioral features (logins, forum posts, video watches, assignment submissions). SHAP explains the top 3 risk factors per student. Groq API generates actionable recommendations. A LangChain AI agent monitors students autonomously, and a RAG chatbot answers student questions using Pinecone vector search. The model auto-retrains weekly on real PostgreSQL data with drift detection.",
+        "Built an XGBoost ML model trained on 14 behavioral features. SHAP explains the top 3 risk factors per student. Groq API generates actionable recommendations. A LangChain AI agent monitors students autonomously, and a RAG chatbot answers student questions using Pinecone vector search. The model auto-retrains weekly on real PostgreSQL data with drift detection.",
       results:
-        "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. Predictions delivered in ~200ms. Model retrains automatically every week on real student behavior and gets smarter over time. Drift detection alerts instructors if model accuracy drops more than 10%.",
+        "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. Predictions delivered in ~200ms. Model retrains automatically every week on real student behavior. Drift detection alerts instructors if model accuracy drops more than 10%.",
       image:
         "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&h=800&fit=crop",
       tags: [
@@ -38,14 +90,13 @@ export function Projects() {
         "XGBoost",
         "SHAP",
         "LangChain",
-        "Groq API",
+        "Groq",
         "Pinecone",
         "PostgreSQL",
         "Redis",
         "AWS EC2",
         "Docker",
         "GitHub Actions",
-        "SendGrid",
         "MLflow",
       ],
       metrics: [
@@ -64,6 +115,7 @@ export function Projects() {
       ],
       liveUrl: "http://54.86.60.216:3001",
       githubUrl: "https://github.com/SamaUdaykiranReddy/student-ai",
+      npmUrl: null,
     },
     {
       title: "Kitchen Management Web Application",
@@ -98,15 +150,15 @@ export function Projects() {
         },
         { icon: Database, label: "MongoDB", sublabel: "Data Storage" },
       ],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: null,
+      githubUrl: null,
+      npmUrl: null,
     },
   ];
 
   return (
     <section id="projects" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -124,12 +176,11 @@ export function Projects() {
             Featured Projects
           </h2>
           <p className="text-muted-foreground max-w-3xl">
-            In-depth look at real-world projects showcasing full-stack
-            development, machine learning, and scalable application design.
+            Real-world projects spanning agentic AI systems, machine learning
+            platforms, and full-stack web applications.
           </p>
         </motion.div>
 
-        {/* Projects */}
         <div className="space-y-20 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
@@ -139,8 +190,8 @@ export function Projects() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <Card className="overflow-hidden border-2 hover:border-foreground transition-all rounded-xl">
-                {/* Project Header */}
+              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all rounded-xl">
+                {/* Header */}
                 <div className="p-8 md:p-10 border-b bg-muted/30">
                   <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                     <div>
@@ -150,16 +201,15 @@ export function Projects() {
                           {project.company} · {project.year}
                         </span>
                       </div>
-                      <h3 className="text-2xl md:text-3xl mb-3 tracking-tight">
+                      <h3 className="text-2xl md:text-3xl mb-3 tracking-tight font-semibold">
                         {project.title}
                       </h3>
-                      <p className="text-muted-foreground max-w-3xl">
+                      <p className="text-muted-foreground max-w-3xl leading-relaxed">
                         {project.description}
                       </p>
                     </div>
                   </div>
 
-                  {/* Metrics */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {project.metrics.map((metric, i) => {
                       const Icon = metric.icon;
@@ -183,9 +233,8 @@ export function Projects() {
                   </div>
                 </div>
 
-                {/* Project Content */}
+                {/* Content */}
                 <div className="grid lg:grid-cols-5">
-                  {/* Image */}
                   <div className="lg:col-span-2 bg-muted min-h-[300px]">
                     <img
                       src={project.image}
@@ -194,7 +243,6 @@ export function Projects() {
                     />
                   </div>
 
-                  {/* Details */}
                   <div className="lg:col-span-3 p-8 md:p-10 space-y-6">
                     <div>
                       <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
@@ -204,7 +252,6 @@ export function Projects() {
                         {project.challenge}
                       </p>
                     </div>
-
                     <div>
                       <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
                         The Solution
@@ -213,7 +260,6 @@ export function Projects() {
                         {project.solution}
                       </p>
                     </div>
-
                     <div>
                       <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-2">
                         The Results
@@ -222,7 +268,6 @@ export function Projects() {
                         {project.results}
                       </p>
                     </div>
-
                     <div>
                       <h4 className="text-xs uppercase tracking-wider text-primary font-medium mb-3">
                         Technologies Used
@@ -240,8 +285,8 @@ export function Projects() {
                       </div>
                     </div>
 
-                    <div className="flex gap-4 pt-2 border-t border-border">
-                      {project.liveUrl !== "#" && (
+                    <div className="flex flex-wrap gap-3 pt-2 border-t border-border">
+                      {project.liveUrl && (
                         <Button asChild size="sm">
                           <a
                             href={project.liveUrl}
@@ -253,7 +298,7 @@ export function Projects() {
                           </a>
                         </Button>
                       )}
-                      {project.githubUrl !== "#" && (
+                      {project.githubUrl && (
                         <Button asChild variant="outline" size="sm">
                           <a
                             href={project.githubUrl}
@@ -262,6 +307,18 @@ export function Projects() {
                           >
                             <Github className="h-4 w-4 mr-2" />
                             Source Code
+                          </a>
+                        </Button>
+                      )}
+                      {project.npmUrl && (
+                        <Button asChild variant="outline" size="sm">
+                          <a
+                            href={project.npmUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Zap className="h-4 w-4 mr-2" />
+                            npm Package
                           </a>
                         </Button>
                       )}
