@@ -9,22 +9,24 @@ import { ProficiencyBreakdown } from "./ProficiencyBreakdown";
 
 export default function AdvancedSkills() {
   const radarSkills = [
-    { name: "Frontend", level: 95 },
-    { name: "Backend", level: 85 },
-    { name: "Database", level: 80 },
-    { name: "System Design", level: 80 },
-    { name: "Tools", level: 80 },
+    { name: "Agentic AI", level: 95 },
+    { name: "LLM Systems", level: 92 },
+    { name: "ML / Data", level: 85 },
+    { name: "Full Stack", level: 90 },
+    { name: "DevOps / AWS", level: 85 },
   ];
 
   const tools = [
-    "Git",
-    "GitHub",
-    "VS Code",
-    "Postman",
+    "LangChain",
+    "LangGraph",
+    "Pinecone",
+    "MLflow",
     "AWS",
-    "Figma",
-    "Vercel",
-    "Firebase",
+    "Docker",
+    "GitHub Actions",
+    "Groq",
+    "Postman",
+    "VS Code",
     "Jira",
     "Slack",
   ];
@@ -71,7 +73,6 @@ export default function AdvancedSkills() {
             </div>
           </TabsContent>
 
-          {/* Detailed Skills Tab */}
           <TabsContent value="detailed">
             <Skills />
           </TabsContent>

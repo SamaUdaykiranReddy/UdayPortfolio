@@ -1,6 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Users, Code, Award, Target, Zap } from "lucide-react";
+import {
+  TrendingUp,
+  Users,
+  Code,
+  Award,
+  Target,
+  Zap,
+  Brain,
+} from "lucide-react";
 import { AnimatedCounter } from "./AnimatedCounter";
 
 export function About() {
@@ -10,45 +18,47 @@ export function About() {
       value: 15,
       suffix: "+",
       label: "Projects Built",
-      description: "Across frontend & backend",
+      description: "AI, ML & full-stack systems",
     },
     {
       icon: Users,
-      label: "Users Impacted",
-      description: "Through production apps",
-      displayValue: "1000s",
+      label: "Companies",
+      description: "Wells Fargo, Deloitte, Infosys",
+      displayValue: "3",
     },
     {
       icon: TrendingUp,
-      value: 4,
-      suffix: " yrs",
+      value: 5,
+      suffix: "+ yrs",
       label: "Experience",
-      description: "Full stack development",
+      description: "AI & software engineering",
     },
     {
       icon: Award,
-      value: 99.9,
-      suffix: "%",
-      label: "Reliability",
-      description: "Across key services",
+      label: "Certified",
+      description: "AWS Cloud Practitioner",
+      displayValue: "AWS",
     },
   ];
 
   const qualities = [
     {
-      icon: Target,
-      title: "Product-Focused",
-      description: "Building features that solve real user and business problems",
+      icon: Brain,
+      title: "Agentic AI Systems",
+      description:
+        "Designing multi-agent pipelines, RAG architectures, and LLM workflows for enterprise production environments",
     },
     {
-      icon: Users,
-      title: "Team Collaboration",
-      description: "Working with designers, engineers, and stakeholders to ship",
+      icon: Target,
+      title: "Business Impact Focused",
+      description:
+        "Every system I build is tied to measurable outcomes — cycle time, accuracy, throughput, and cost efficiency",
     },
     {
       icon: Zap,
-      title: "Efficient Execution",
-      description: "Delivering high-quality code that scales as requirements evolve",
+      title: "End-to-End Delivery",
+      description:
+        "From architecture to deployment — I own the full lifecycle including CI/CD, monitoring, and optimization",
     },
   ];
 
@@ -70,7 +80,8 @@ export function About() {
             <div className="h-px flex-1 bg-border" />
           </div>
           <h2 className="text-4xl md:text-5xl tracking-tight leading-tight">
-            Building Reliable, Scalable Applications
+            Building Autonomous AI Systems <br className="hidden md:block" />
+            That Drive Real Business Outcomes
           </h2>
         </motion.div>
 
@@ -85,31 +96,34 @@ export function About() {
           >
             <div className="relative pl-5 border-l-2 border-primary space-y-5">
               <p className="text-[17px] leading-[1.75] text-foreground">
-                I'm a{" "}
-                <strong className="font-semibold">Full Stack Developer</strong>{" "}
+                I'm an{" "}
+                <strong className="font-semibold">Agentic AI Engineer</strong>{" "}
                 with{" "}
-                <strong className="font-semibold">4 years of experience</strong>{" "}
-                building production web applications. I've worked across frontend
-                and backend systems, contributing to features used by real users
-                in live environments.
+                <strong className="font-semibold">
+                  5+ years of experience
+                </strong>{" "}
+                designing and deploying production-grade autonomous AI systems
+                across banking and enterprise consulting environments at{" "}
+                <strong className="font-semibold">Wells Fargo</strong> and{" "}
+                <strong className="font-semibold">Deloitte</strong>.
               </p>
               <p className="text-[17px] leading-[1.75] text-muted-foreground">
-                My experience spans REST API design, database integration,
-                performance improvements, and cross-functional collaboration. I
-                write{" "}
+                I specialize in{" "}
                 <strong className="font-semibold text-foreground">
-                  clean, maintainable code
+                  multi-agent systems, RAG pipelines, and tool-integrated LLM
+                  workflows
                 </strong>{" "}
-                that scales as product requirements grow.
+                using GPT-4, Claude, and Gemini. My work has improved decision
+                accuracy by 17% and reduced operational cycle time by 18% in
+                production environments.
               </p>
               <p className="text-[17px] leading-[1.75] text-muted-foreground">
-                I enjoy{" "}
+                I translate complex business workflows into{" "}
                 <strong className="font-semibold text-foreground">
-                  full-stack challenges
+                  scalable agentic solutions
                 </strong>{" "}
-                — from crafting intuitive UIs to building backend logic and
-                integrating cloud services. I'm continuously improving in system
-                design, performance optimization, and modern dev practices.
+                — from prompt engineering and evaluation frameworks to full
+                deployment with CI/CD, monitoring, and drift detection.
               </p>
             </div>
 
@@ -160,16 +174,12 @@ export function About() {
                 alt="Udaykiran Reddy Sama"
                 className="w-full aspect-[4/5] object-cover object-top transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
               />
-
-              {/* Gradient overlay at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-black/50 to-transparent" />
-
-              {/* Name tag */}
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="bg-background/90 backdrop-blur-sm rounded-xl px-4 py-3 border border-border/50">
                   <p className="font-semibold text-sm">Udaykiran Reddy Sama</p>
                   <p className="text-xs text-muted-foreground">
-                    Full Stack Developer · Boston, MA
+                    Agentic AI Engineer · Woburn, MA
                   </p>
                 </div>
               </div>
