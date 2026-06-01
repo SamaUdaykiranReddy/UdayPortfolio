@@ -13,6 +13,8 @@ import {
   GitPullRequest,
   Building2,
   Search,
+  Code,
+  Layers,
 } from "lucide-react";
 import { Badge } from "./ui/Badge";
 import { motion } from "framer-motion";
@@ -29,7 +31,7 @@ export function Projects() {
       challenge:
         "Developers waste hours debugging production errors manually. Traditional tools like Sentry only capture errors — they don't fix them. The challenge was building a fully autonomous system that not only detects errors but analyzes, fixes, tests, and deploys the solution without human intervention.",
       solution:
-        "Built a 7-agent LangGraph pipeline (Anomaly Detector → Root Cause Analyst → Fix Suggester → Test Generator → BDD Generator → Explainer → PR Creator). RAG on the user's actual codebase via Pinecone ensures fixes reference real function names. Multi-tenant architecture with per-user GitHub, Jira, Slack, and email integrations. Published devmind-sdk to npm.",
+        "Built a 7-agent LangGraph pipeline (Anomaly Detector → Root Cause Analyst → Fix Suggester → Test Generator → BDD Generator → Explainer → PR Creator). RAG on the user's actual codebase via Pinecone ensures fixes reference real function names. Multi-tenant architecture with per-user GitHub, Jira, Slack, and email integrations.",
       results:
         "Fully deployed on AWS EC2 with CI/CD via GitHub Actions. SDK published on npm. Automatically creates GitHub PRs with fixes applied, Jira tickets, Slack notifications, and email alerts. Each error analyzed in ~200ms with 7 specialized AI agents.",
       image:
@@ -148,7 +150,7 @@ export function Projects() {
       metrics: [
         {
           icon: Building2,
-          label: "40% Less Manual Effort",
+          label: "40% Less Effort",
           sublabel: "Banking Operations",
         },
         { icon: TrendingUp, label: "18% Faster", sublabel: "Turnaround Time" },
@@ -208,37 +210,116 @@ export function Projects() {
       proprietary: true,
     },
     {
-      title: "Kitchen Management Web Application",
-      company: "GenX AI",
-      category: "Full-Stack Web Application",
+      title: "Agentic Workflow Orchestration Engine",
+      company: "Wells Fargo",
+      category: "Enterprise Agentic AI",
       year: "2024",
       description:
-        "A product-focused kitchen and order management system where admins manage items and users place orders through a responsive web interface.",
+        "Intelligent workflow orchestration engine that replaced manual coordination across multiple enterprise systems with autonomous multi-step AI execution.",
       challenge:
-        "The system required clear admin and user workflows, reliable data handling for orders and items, and a structure that could support future feature additions without refactoring.",
+        "Complex enterprise workflows required manual coordination across multiple systems, causing execution delays, fragmented decision-making, and operational inefficiencies at scale.",
       solution:
-        "Built a React-based frontend using Tailwind CSS and custom styles, and developed REST APIs using Node.js connected to MongoDB. Implemented clean component-based architecture and tested APIs using Postman.",
+        "Designed multi-step reasoning agents with planning capabilities. Built orchestration framework with async execution, exception handling, retry mechanisms, and memory-aware agent state management. Integrated APIs for external action handling.",
       results:
-        "Delivered a scalable and maintainable full-stack application with smooth frontend–backend communication and role-based workflows.",
+        "Reduced workflow cycle time by 45%, improved execution consistency, and transformed manual orchestration into intelligent autonomous execution at enterprise scale.",
+      image:
+        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&h=800&fit=crop",
+      tags: [
+        "Python",
+        "GPT-4",
+        "Claude",
+        "Gemini",
+        "Multi-Agent Systems",
+        "Tool Calling",
+        "MCP",
+        "Async Execution",
+        "Distributed Systems",
+        "Memory Frameworks",
+        "APIs",
+      ],
+      metrics: [
+        { icon: Zap, label: "45% Faster", sublabel: "Workflow Cycle Time" },
+        { icon: Layers, label: "Multi-Step", sublabel: "Reasoning Agents" },
+        {
+          icon: TrendingUp,
+          label: "Async Execution",
+          sublabel: "Performance Optimized",
+        },
+        { icon: Shield, label: "Fault Tolerant", sublabel: "Retry & Fallback" },
+      ],
+      liveUrl: null,
+      githubUrl: null,
+      npmUrl: null,
+      proprietary: true,
+    },
+    {
+      title: "LLM Prompt Optimization Framework",
+      company: "Deloitte",
+      category: "LLM Engineering",
+      year: "2023",
+      description:
+        "Structured prompt engineering and evaluation framework that made LLM outputs production-reliable for enterprise deployments — reducing hallucinations and improving output consistency.",
+      challenge:
+        "LLM-generated outputs showed inconsistency, hallucinations, variable reasoning quality, and unreliable responses, limiting enterprise production adoption across consulting clients.",
+      solution:
+        "Designed structured prompt engineering framework with benchmarking pipelines. Applied chain-of-thought reasoning, zero-shot and few-shot templates. Built output evaluation scorecards and response quality measurement framework with iterative optimization.",
+      results:
+        "Reduced hallucinations by 30%, improved output consistency significantly, reduced latency through prompt optimization, and accelerated production readiness of enterprise AI deployments.",
+      image:
+        "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=800&fit=crop",
+      tags: [
+        "GPT-4",
+        "Claude",
+        "Gemini",
+        "Python",
+        "Prompt Engineering",
+        "Chain-of-Thought",
+        "Zero-Shot",
+        "Few-Shot",
+        "Evaluation Frameworks",
+        "Benchmarking",
+      ],
+      metrics: [
+        { icon: Brain, label: "30% Less", sublabel: "Hallucinations" },
+        { icon: TrendingUp, label: "Consistency", sublabel: "Output Improved" },
+        { icon: Zap, label: "Lower Latency", sublabel: "Prompt Optimized" },
+        { icon: Shield, label: "Production Ready", sublabel: "Enterprise AI" },
+      ],
+      liveUrl: null,
+      githubUrl: null,
+      npmUrl: null,
+      proprietary: true,
+    },
+    {
+      title: "Kitchen Management Web Application",
+      company: "Personal Project",
+      category: "Personal Full-Stack Project",
+      year: "2024",
+      description:
+        "A handwritten, fully custom kitchen and order management system built from scratch — no templates, no boilerplate. Admins manage menu items and users place orders through a clean, responsive web interface.",
+      challenge:
+        "Designing clear admin and user workflows, reliable order and item management, and a maintainable architecture that could grow without major refactoring — all built by hand.",
+      solution:
+        "Handwritten React frontend with Tailwind CSS and custom CSS. Built REST APIs from scratch using Node.js and Express connected to MongoDB. Clean component-based architecture with role-based access control, tested thoroughly with Postman.",
+      results:
+        "A fully functional, scalable full-stack application proving end-to-end development capability — from database schema design to responsive UI — all written by hand without relying on templates or code generators.",
       image:
         "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1200&h=800&fit=crop",
       tags: [
         "React.js",
         "Node.js",
+        "Express",
         "MongoDB",
         "Tailwind CSS",
+        "Custom CSS",
         "REST APIs",
         "Postman",
       ],
       metrics: [
-        { icon: Users, label: "Admin & Users", sublabel: "Role-Based Access" },
-        { icon: Zap, label: "REST APIs", sublabel: "Backend Integration" },
-        {
-          icon: TrendingUp,
-          label: "Scalable",
-          sublabel: "Future-Ready Design",
-        },
-        { icon: Database, label: "MongoDB", sublabel: "Data Storage" },
+        { icon: Code, label: "Handwritten", sublabel: "No Templates Used" },
+        { icon: Users, label: "Role-Based", sublabel: "Admin & User Access" },
+        { icon: Database, label: "MongoDB", sublabel: "Custom Schema Design" },
+        { icon: Zap, label: "REST APIs", sublabel: "Built from Scratch" },
       ],
       liveUrl: null,
       githubUrl: null,
@@ -267,9 +348,9 @@ export function Projects() {
             Featured Projects
           </h2>
           <p className="text-muted-foreground max-w-3xl">
-            Real-world projects spanning enterprise agentic AI systems, machine
-            learning platforms, and full-stack applications — from banking
-            automation to autonomous debugging.
+            7 projects spanning enterprise agentic AI systems, machine learning
+            platforms, and full-stack applications — from banking automation at
+            Wells Fargo to autonomous debugging tools.
           </p>
         </motion.div>
 
