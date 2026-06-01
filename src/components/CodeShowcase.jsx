@@ -11,99 +11,186 @@ export function CodeShowcase() {
 
   const codeExamples = [
     {
-      title: "Microservices Architecture",
-      language: "TypeScript",
-      description: "Event-driven microservices with message queue",
-      code: `// Event-driven microservices pattern
-import { EventEmitter } from 'events';
-import { MessageQueue } from './queue';
+      title: "DevMind — Error Feed",
+      language: "TypeScript / React",
+      description: "Real-time error feed with 5s polling, search & filter",
+      code: `// DevMind: Real-time error feed (ErrorFeed.tsx)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://34.205.172.253:3001";
 
-class MicroserviceOrchestrator extends EventEmitter {
-  private queue: MessageQueue;
-  
-  async processOrder(order: Order) {
-    // Emit event to inventory service
-    await this.queue.publish('inventory.check', order);
-    
-    // Listen for inventory confirmation
-    this.on('inventory.confirmed', async (data) => {
-      await this.queue.publish('payment.process', data);
-    });
-    
-    // Handle payment success
-    this.on('payment.success', async (data) => {
-      await this.queue.publish('shipping.create', data);
-    });
-  }
-}`,
-    },
-    {
-      title: "Performance Optimization",
-      language: "React + TypeScript",
-      description: "Advanced React optimization techniques",
-      code: `// Virtual scrolling with intersection observer
-import { useVirtualizer } from '@tanstack/react-virtual';
+export default function ErrorFeed() {
+  const [errors, setErrors] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
-export function OptimizedList({ data }: Props) {
-  const parentRef = useRef<HTMLDivElement>(null);
-  
-  const virtualizer = useVirtualizer({
-    count: data.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 50,
-    overscan: 5,
+  useEffect(() => {
+    const load = async () => {
+      const token = localStorage.getItem("devmind_token");
+      const headers = token ? { Authorization: \`Bearer \${token}\` } : {};
+      const res = await fetch(\`\${API_URL}/api/errors\`, { headers });
+      const data = await res.json();
+      setErrors(Array.isArray(data) ? data : []);
+    };
+
+    load();
+    const interval = setInterval(load, 5000); // auto-refresh every 5s
+    return () => clearInterval(interval);
+  }, []);
+
+  const filtered = errors.filter((e) => {
+    const matchesFilter = filter === "all" ? true
+      : filter === "open" ? e.status !== "resolved"
+      : e.status === "resolved";
+    const matchesSearch = search === "" ? true
+      : e.error_text?.toLowerCase().includes(search.toLowerCase()) ||
+        e.service?.toLowerCase().includes(search.toLowerCase()) ||
+        e.root_cause?.toLowerCase().includes(search.toLowerCase());
+    return matchesFilter && matchesSearch;
   });
-  
-  return (
-    <div ref={parentRef} className="h-screen overflow-auto">
-      <div style={{ height: virtualizer.getTotalSize() }}>
-        {virtualizer.getVirtualItems().map((item) => (
-          <div key={item.key} style={{
-            transform: \`translateY(\${item.start}px)\`
-          }}>
-            <ListItem data={data[item.index]} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+  return filtered.map((error) => (
+    <ErrorCard key={error.id} analysis={error} />
+  ));
 }`,
     },
     {
-      title: "System Design Pattern",
-      language: "Go",
-      description: "Circuit breaker pattern implementation",
-      code: `// Circuit breaker for resilient microservices
-type CircuitBreaker struct {
-    maxFailures  int
-    timeout      time.Duration
-    failures     int
-    lastFailTime time.Time
-    state        State
-}
+      title: "Student AI — Risk Dashboard",
+      language: "TypeScript / Next.js",
+      description: "Instructor dashboard with ML predictions and SHAP charts",
+      code: `// Student AI: Risk prediction + SHAP visualization (dashboard/page.tsx)
+const getPrediction = async (student) => {
+  setStudents((prev) =>
+    prev.map((s) => s.id === student.id ? { ...s, loading: true } : s)
+  );
 
-func (cb *CircuitBreaker) Call(fn func() error) error {
-    if cb.state == Open {
-        if time.Since(cb.lastFailTime) > cb.timeout {
-            cb.state = HalfOpen
-        } else {
-            return ErrCircuitOpen
-        }
-    }
-    
-    err := fn()
-    if err != nil {
-        cb.failures++
-        cb.lastFailTime = time.Now()
-        if cb.failures >= cb.maxFailures {
-            cb.state = Open
-        }
-        return err
-    }
-    
-    cb.reset()
-    return nil
-}`,
+  const res = await api.post(\`/api/predict/\${student.id}\`);
+  // Returns: { risk_score, risk_label, top_factors, suggestion }
+
+  const updated = { ...student, prediction: res.data, loading: false };
+  setStudents((prev) =>
+    prev.map((s) => s.id === student.id ? updated : s)
+  );
+  setSelected(updated);
+};
+
+// SHAP risk factors rendered as horizontal bar chart
+<ResponsiveContainer width="100%" height={120}>
+  <BarChart
+    data={selected.prediction.top_factors.map((f) => ({
+      name: f.feature.replace(/_/g, " "),
+      value: Math.abs(f.impact),
+    }))}
+    layout="vertical"
+  >
+    <YAxis type="category" dataKey="name" width={100}
+      tick={{ fontSize: 10, fill: "#9ca3af" }} />
+    <Bar dataKey="value" radius={4}>
+      {selected.prediction.top_factors.map((f, i) => (
+        <Cell key={i} fill={riskBarColor(selected.prediction.risk_label)} />
+      ))}
+    </Bar>
+  </BarChart>
+</ResponsiveContainer>
+
+// AI recommendation from Groq displayed below
+<p>{selected.prediction.suggestion}</p>`,
+    },
+    {
+      title: "LangGraph Agent Pipeline",
+      language: "Python",
+      description: "DevMind — 7-agent autonomous debugging orchestration",
+      code: `# DevMind: LangGraph 7-agent pipeline (orchestrator.py)
+from langgraph.graph import StateGraph, END
+from typing import TypedDict, Optional
+
+class AgentState(TypedDict):
+    error: str
+    stack: str
+    anomaly: Optional[dict]
+    root_cause: Optional[str]
+    fix: Optional[str]
+    tests: Optional[str]
+    bdd: Optional[str]
+    explanation: Optional[str]
+    pr_url: Optional[str]
+
+def build_devmind_pipeline():
+    graph = StateGraph(AgentState)
+
+    # Register all 7 agents
+    graph.add_node("anomaly_detector",   anomaly_detector_agent)
+    graph.add_node("root_cause_analyst", root_cause_agent)
+    graph.add_node("fix_suggester",      fix_suggester_agent)  # RAG-powered
+    graph.add_node("test_generator",     test_generator_agent)
+    graph.add_node("bdd_generator",      bdd_generator_agent)
+    graph.add_node("explainer",          explainer_agent)
+    graph.add_node("pr_creator",         pr_creator_agent)     # opens GitHub PR
+
+    # Sequential pipeline
+    graph.set_entry_point("anomaly_detector")
+    graph.add_edge("anomaly_detector",   "root_cause_analyst")
+    graph.add_edge("root_cause_analyst", "fix_suggester")
+    graph.add_edge("fix_suggester",      "test_generator")
+    graph.add_edge("test_generator",     "bdd_generator")
+    graph.add_edge("bdd_generator",      "explainer")
+    graph.add_edge("explainer",          "pr_creator")
+    graph.add_edge("pr_creator",          END)
+
+    return graph.compile()
+    # Total: ~200ms per error across all 7 agents`,
+    },
+    {
+      title: "XGBoost + SHAP Prediction",
+      language: "Python",
+      description: "Student AI — risk scoring with explainability",
+      code: `# Student AI: XGBoost prediction + SHAP (main.py)
+import xgboost as xgb
+import shap
+import numpy as np
+
+model = xgb.XGBClassifier(
+    n_estimators=100,
+    max_depth=4,
+    scale_pos_weight=3,   # handle class imbalance
+    eval_metric="auc"
+)
+explainer = shap.TreeExplainer(model)
+
+@app.post("/predict")
+async def predict(data: PredictRequest, db=Depends(get_db)):
+    # Fetch 14 behavioral features from PostgreSQL
+    features = await get_student_features(data.student_id, db)
+
+    X = np.array([[
+        features["avg_logins"],
+        features["avg_forum_posts"],
+        features["avg_video_minutes"],
+        features["avg_submissions"],
+        features["login_trend"],         # week-over-week change
+        features["missed_assignments"],
+        features["submission_rate"],
+        features["avg_score"],
+        features["min_score"],
+        # + 5 demographic features
+    ]])
+
+    risk_score = float(model.predict_proba(X)[0][1])
+    shap_values = explainer.shap_values(X)[0]
+
+    # Top 3 factors for instructor dashboard
+    top_factors = sorted(
+        zip(FEATURE_NAMES, shap_values),
+        key=lambda x: abs(x[1]), reverse=True
+    )[:3]
+
+    # Groq generates actionable recommendation
+    suggestion = await generate_suggestion(risk_score, top_factors)
+
+    return {
+        "risk_score": risk_score,
+        "risk_label": "high" if risk_score > 0.7 else "medium" if risk_score > 0.4 else "low",
+        "top_factors": [{"feature": f, "impact": float(v)} for f, v in top_factors],
+        "suggestion": suggestion
+    }`,
     },
   ];
 
@@ -121,15 +208,15 @@ func (cb *CircuitBreaker) Call(fn func() error) error {
           <motion.button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`px-4 py-2 border-2 transition-all ${
+            className={`px-4 py-2 border-2 rounded-xl transition-all text-sm font-medium ${
               activeTab === index
                 ? "border-foreground bg-foreground text-background"
                 : "border-border hover:border-foreground"
             }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
           >
-            <div className="text-sm font-medium">{example.title}</div>
+            {example.title}
           </motion.button>
         ))}
       </div>
@@ -140,16 +227,20 @@ func (cb *CircuitBreaker) Call(fn func() error) error {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="border-2 border-border bg-zinc-950 text-zinc-100 overflow-hidden"
+        className="border-2 border-border bg-zinc-950 text-zinc-100 overflow-hidden rounded-xl"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-zinc-800">
           <div>
-            <div className="font-medium mb-1">{codeExamples[activeTab].title}</div>
-            <div className="text-sm text-zinc-400">{codeExamples[activeTab].description}</div>
+            <div className="font-medium mb-1">
+              {codeExamples[activeTab].title}
+            </div>
+            <div className="text-sm text-zinc-400">
+              {codeExamples[activeTab].description}
+            </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-zinc-400 px-2 py-1 bg-zinc-800 rounded">
+            <span className="text-xs text-zinc-400 px-2 py-1 bg-zinc-800 rounded-lg">
               {codeExamples[activeTab].language}
             </span>
             <Button
@@ -179,18 +270,19 @@ func (cb *CircuitBreaker) Call(fn func() error) error {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="p-4 border-2 border-border text-center">
-          <div className="text-2xl mb-1">50K+</div>
-          <div className="text-xs text-muted-foreground">Lines of Code</div>
-        </div>
-        <div className="p-4 border-2 border-border text-center">
-          <div className="text-2xl mb-1">100%</div>
-          <div className="text-xs text-muted-foreground">Test Coverage</div>
-        </div>
-        <div className="p-4 border-2 border-border text-center">
-          <div className="text-2xl mb-1">A+</div>
-          <div className="text-xs text-muted-foreground">Code Quality</div>
-        </div>
+        {[
+          { value: "4", label: "AI Projects" },
+          { value: "7", label: "Agent Pipeline" },
+          { value: "5+", label: "Years Coding" },
+        ].map((stat, i) => (
+          <div
+            key={i}
+            className="p-4 border-2 border-border rounded-xl text-center hover:border-primary/50 transition-colors"
+          >
+            <div className="text-2xl font-semibold mb-1">{stat.value}</div>
+            <div className="text-xs text-muted-foreground">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -85,7 +85,7 @@ export function Hero() {
       label: "GitHub",
     },
     {
-      href: "https://linkedin.com/in/udayreddysama",
+      href: "https://www.linkedin.com/in/uday-reddy-880269170/",
       icon: Linkedin,
       label: "LinkedIn",
     },

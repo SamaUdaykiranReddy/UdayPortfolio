@@ -13,7 +13,7 @@ export function Testimonials() {
       title: "VP of AI Operations",
       company: "Wells Fargo",
       rating: 5,
-      linkedinUrl: "https://linkedin.com/in/udayreddysama",
+      linkedinUrl: "https://www.linkedin.com/in/uday-reddy-880269170/",
     },
     {
       quote:
@@ -22,7 +22,7 @@ export function Testimonials() {
       title: "AI Solutions Architect",
       company: "Deloitte",
       rating: 5,
-      linkedinUrl: "https://linkedin.com/in/udayreddysama",
+      linkedinUrl: "https://www.linkedin.com/in/uday-reddy-880269170/",
     },
     {
       quote:
@@ -31,7 +31,7 @@ export function Testimonials() {
       title: "Senior Product Manager",
       company: "Deloitte",
       rating: 5,
-      linkedinUrl: "https://linkedin.com/in/udayreddysama",
+      linkedinUrl: "https://www.linkedin.com/in/uday-reddy-880269170/",
     },
   ];
 
@@ -148,11 +148,7 @@ export function Testimonials() {
             size="lg"
             className="border-2 rounded-xl"
           >
-            <a
-              href="https://linkedin.com/in/udayreddysama"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://www.linkedin.com/in/uday-reddy-880269170/">
               <Linkedin className="h-4 w-4 mr-2" />
               View LinkedIn Profile
             </a>
