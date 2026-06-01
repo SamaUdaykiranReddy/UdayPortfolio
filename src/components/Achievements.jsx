@@ -1,15 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Award,
-  Star,
-  Target,
-  TrendingUp,
-  Users,
-  Brain,
-  Bot,
-  Database,
-} from "lucide-react";
+import { Award, Star, Target, TrendingUp, Brain, Bot } from "lucide-react";
 
 export default function Achievements() {
   const achievements = [
