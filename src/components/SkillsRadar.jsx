@@ -6,9 +6,9 @@ import { useState } from "react";
 export function SkillsRadar({ skills }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const centerX = 150;
-  const centerY = 150;
-  const radius = 100;
+  const centerX = 200;
+  const centerY = 200;
+  const radius = 120;
   const levels = 5;
 
   const getPolygonPoints = (values) =>
@@ -40,14 +40,14 @@ export function SkillsRadar({ skills }) {
   const getLabelPoint = (index) => {
     const angle = (Math.PI * 2 * index) / skills.length - Math.PI / 2;
     return {
-      x: centerX + (radius + 28) * Math.cos(angle),
-      y: centerY + (radius + 28) * Math.sin(angle),
+      x: centerX + (radius + 38) * Math.cos(angle),
+      y: centerY + (radius + 38) * Math.sin(angle),
     };
   };
 
   return (
     <div className="relative w-full aspect-square max-w-lg mx-auto select-none">
-      <svg viewBox="0 0 300 300" className="w-full h-full overflow-visible">
+      <svg viewBox="0 0 400 400" className="w-full h-full overflow-visible">
         {/* Background circles */}
         {[...Array(levels)].map((_, i) => (
           <circle
@@ -93,7 +93,7 @@ export function SkillsRadar({ skills }) {
           style={{ transformOrigin: `${centerX}px ${centerY}px` }}
         />
 
-        {/* Data points + hover zones */}
+        {/* Data points + labels */}
         {skills.map((skill, i) => {
           const pt = getDataPoint(i);
           const lp = getLabelPoint(i);
@@ -102,11 +102,11 @@ export function SkillsRadar({ skills }) {
 
           return (
             <g key={i}>
-              {/* Invisible large hit area */}
+              {/* Large invisible hit area */}
               <circle
                 cx={pt.x}
                 cy={pt.y}
-                r={18}
+                r={20}
                 fill="transparent"
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(i)}
@@ -117,17 +117,12 @@ export function SkillsRadar({ skills }) {
               <motion.circle
                 cx={pt.x}
                 cy={pt.y}
-                r={isHovered ? 7 : 4}
                 fill={
                   isHovered
                     ? "hsl(var(--primary))"
                     : "hsl(var(--primary) / 0.6)"
                 }
-                opacity={isOther ? 0.15 : 1}
-                animate={{
-                  r: isHovered ? 7 : 4,
-                  opacity: isOther ? 0.15 : 1,
-                }}
+                animate={{ r: isHovered ? 7 : 4, opacity: isOther ? 0.15 : 1 }}
                 transition={{ duration: 0.2 }}
                 className="pointer-events-none"
               />
@@ -137,7 +132,7 @@ export function SkillsRadar({ skills }) {
                 <motion.circle
                   cx={pt.x}
                   cy={pt.y}
-                  r={12}
+                  r={13}
                   fill="none"
                   stroke="hsl(var(--primary))"
                   strokeWidth="1.5"
@@ -155,11 +150,8 @@ export function SkillsRadar({ skills }) {
                 y={lp.y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fontSize="10"
-                animate={{
-                  opacity: isOther ? 0.2 : 1,
-                  fontWeight: isHovered ? 700 : 400,
-                }}
+                fontSize="11"
+                animate={{ opacity: isOther ? 0.2 : 1 }}
                 transition={{ duration: 0.2 }}
                 style={{
                   fill: isHovered
